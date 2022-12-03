@@ -74,8 +74,7 @@
         android:justificationMode="inter_word"
         app:layout_constraintBottom_toBottomOf="@id/barrierBottom"
         app:layout_constraintTop_toBottomOf="@id/barrierTop"
-        tools:text="@sample/posts.json/data/content"
-        tools:targetApi="o" />
+        tools:text="@sample/posts.json/data/content" />
 
     <ImageView
         android:id="@+id/liked"
@@ -84,7 +83,7 @@
         android:layout_marginVertical="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24"
-        android:contentDescription="@string/liked" />
+ />
 
     <TextView
         android:id="@+id/likedCount"
@@ -104,7 +103,7 @@
         android:layout_margin="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
         app:layout_constraintStart_toEndOf="@id/likedCount"
-        android:contentDescription="@string/shared" />
+          />
 
     <TextView
         android:id="@+id/sharedCount"
@@ -126,7 +125,7 @@
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24"
         app:layout_constraintEnd_toStartOf="@id/viewsCount"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        android:contentDescription="@string/views" />
+        />
 
     <TextView
         android:id="@+id/viewsCount"
