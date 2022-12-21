@@ -2,9 +2,7 @@ package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.R
 import ru.netology.nmedia.dto.Post
-import kotlin.math.roundToInt
 
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -28,41 +26,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likes = if (post.likedByMe) post.likes++ else post.likes--
         )
         data.value = post
-        // TODO
-        liked.setImageResource(if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24)
-        likedCount.text = countTransform(post.likes)
     }
 
     override fun share() {
         post = post.copy(sharedByMe = !post.sharedByMe, shares = post.shares++)
         data.value = post
-        // TODO
-        binding.shared.setImageResource(R.drawable.ic_baseline_share_ok_24)
-        sharedCount.text = countTransform(post.shares)
-    }
-
-    override fun countTransform(x: Int): String {
-        val numberToString = x.toString()
-        val lengthNumber = when (numberToString.length) {
-            in 1..3 -> numberToString
-            in 4..6 -> {
-                val y = x.toDouble() / 1000.0
-                if (y > 1.1 && y < 10) {
-                    (((y * 10.0).roundToInt()) / 10.0).toString() + "K"
-                } else {
-                    y.toInt().toString() + "K"
-                }
-            }
-            in 7..9 -> {
-                val y = x.toDouble() / 1000000.0
-                if (y >= 1.1) {
-                    (((y * 10.0).roundToInt()) / 10.0).toString() + "M"
-                } else {
-                    y.toInt().toString() + "M"
-                }
-            }
-            else -> "не определено"
-        }
-        return lengthNumber
     }
 }
