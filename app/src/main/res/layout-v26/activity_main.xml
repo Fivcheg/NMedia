@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -51,14 +51,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
-    <androidx.constraintlayout.widget.Barrier
+    <android.support.constraint.Barrier
         android:id="@+id/barrierTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar,published,menu" />
 
-    <androidx.constraintlayout.widget.Barrier
+    <android.support.constraint.Barrier
         android:id="@+id/barrierBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +74,6 @@
         android:justificationMode="inter_word"
         app:layout_constraintBottom_toBottomOf="@id/barrierBottom"
         app:layout_constraintTop_toBottomOf="@id/barrierTop"
-        tools:targetApi="o"
         tools:text="@sample/posts.json/data/content" />
 
     <ImageView
@@ -82,39 +81,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/common_spacing"
-        android:contentDescription="@string/liked"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+ />
 
     <TextView
         android:id="@+id/likedCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/common_spacing"
         android:layout_marginStart="@dimen/post_info_counter"
-        app:layout_constraintStart_toEndOf="@id/liked"
+        android:layout_marginVertical="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        tools:text="@sample/posts.json/data/like" />
+        app:layout_constraintStart_toEndOf="@id/liked"
+        tools:text="@sample/posts.json/data/like"  />
 
     <ImageView
         android:id="@+id/shared"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_share_24"
         android:layout_margin="@dimen/common_spacing"
-        android:contentDescription="@string/shared"
-        app:layout_constraintStart_toEndOf="@id/likedCount"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_share_24" />
+        app:layout_constraintStart_toEndOf="@id/likedCount"
+          />
 
     <TextView
         android:id="@+id/sharedCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/common_spacing"
         android:layout_marginStart="@dimen/post_info_counter"
-        app:layout_constraintStart_toEndOf="@id/shared"
+        android:layout_marginVertical="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        tools:text="@sample/posts.json/data/shared" />
+        app:layout_constraintStart_toEndOf="@id/shared"
+        tools:text="@sample/posts.json/data/shared"
+        />
 
     <ImageView
         android:id="@+id/views"
@@ -122,18 +122,19 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/post_info_counter"
-        android:contentDescription="@string/views"
+        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24"
         app:layout_constraintEnd_toStartOf="@id/viewsCount"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+        />
 
     <TextView
         android:id="@+id/viewsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/common_spacing"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        tools:text="@sample/posts.json/data/views" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@sample/posts.json/data/views"
+ />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
