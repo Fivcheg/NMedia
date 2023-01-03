@@ -88,17 +88,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun changeVisibility() {
-        if (!binding.cancel!!.isShown) {
-            binding.save?.visibility = VISIBLE
-            binding.cancel?.visibility = VISIBLE
+        with(binding) {
+            save?.visibility = VISIBLE
+            cancel?.visibility = VISIBLE
         }
     }
+
     private fun changeInvisibility() {
-            binding.save?.visibility = INVISIBLE
-            binding.cancel?.visibility = INVISIBLE
+        with(binding) {
+            save?.visibility = INVISIBLE
+            cancel?.visibility = INVISIBLE
+        }
     }
 }
+
 
 
 
