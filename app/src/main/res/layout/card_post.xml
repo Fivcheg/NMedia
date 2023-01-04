@@ -76,14 +76,15 @@
         tools:targetApi="o"
         tools:text="@sample/posts.json/data/content" />
 
-    <ImageView
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/liked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/common_spacing"
         android:contentDescription="@string/liked"
+        android:button="@drawable/ic_baseline_favorit_24_material"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+        style="@style/Widget.AppTheme.LiveCheckBox"
+        />
 
     <TextView
         android:id="@+id/likedCount"
@@ -95,15 +96,15 @@
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
         tools:text="@sample/posts.json/data/like" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shared"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_spacing"
+        android:layout_height="48dp"
         android:contentDescription="@string/shared"
+        app:icon="@drawable/ic_baseline_share_24_material"
         app:layout_constraintStart_toEndOf="@id/likedCount"
-        app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_share_24" />
+        app:layout_constraintTop_toBottomOf="@id/barrierBottom" />
 
     <TextView
         android:id="@+id/sharedCount"

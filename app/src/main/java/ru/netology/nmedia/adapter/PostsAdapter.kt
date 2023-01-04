@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import kotlin.math.roundToInt
@@ -54,15 +52,10 @@ class PostViewHolder(
             likedCount.text = countTransform(post.likes)
             sharedCount.text = countTransform(post.shares)
             viewsCount.text = countTransform(post.views)
-            shared.setImageResource(
-                if (post.sharedByMe) R.drawable.ic_baseline_share_ok_24 else R.drawable.ic_baseline_share_24
-            )
             shared.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-            liked.setImageResource(
-                if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
-            )
+            liked.isChecked = post.likedByMe
             liked.setOnClickListener {
                 onInteractionListener.onLike(post)
             }

@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
@@ -40,38 +41,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val adapter = PostsAdapter(interaction)
-        binding.list?.adapter = adapter
-        this.viewModel.data.observe(this) { posts ->
+        binding.list.adapter = adapter
+        viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
-        changeInvisibility()
+
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L) {
                 return@observe
             }
             with(binding.content) {
-                this?.requestFocus()
-                this?.setText(post.content)
+                requestFocus()
+                setText(post.content)
             }
         }
 
-        // Почему дабл клик нужно делать?
-        binding.content?.setOnClickListener {
-            changeVisibility()
+        binding.content.setOnClickListener {
+            it.focusAndShowKeys()
+
         }
-        binding.cancel?.setOnClickListener {
+
+        binding.cancel.setOnClickListener {
             with(binding.content) {
                 viewModel.cancel()
-                this?.setText("")
-                this?.clearFocus()
-                this?.let { it1 -> AndroidUtils.hideKeyboard(it1) }
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyboard(this)
             }
-            changeInvisibility()
         }
 
-        binding.save?.setOnClickListener {
+        binding.save.setOnClickListener {
             with(binding.content) {
-                if (this?.text?.isNullOrBlank() == true) {
+                if (text.isNullOrBlank()) {
                     Toast.makeText(
                         this@MainActivity,
                         "Поле не может быть пустым!",
@@ -79,9 +80,8 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
-                viewModel.changeContent(this!!.text.toString())
+                viewModel.changeContent(text.toString())
                 viewModel.save()
-                changeInvisibility()
                 setText("")
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)
@@ -89,17 +89,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeVisibility() {
-        with(binding) {
-            save?.visibility = VISIBLE
-            cancel?.visibility = VISIBLE
+    private fun View.focusAndShowKeys() {
+        fun View.showTheKeysNow() {
+            if (isFocused) {
+                with(binding) {
+                    //Как повесить VISIBLE и INVISIBLE на group_btn, а не отдельные кнопки??? Не работает!
+                    save.visibility = VISIBLE
+                    cancel.visibility = VISIBLE
+                }
+            }
         }
-    }
-
-    private fun changeInvisibility() {
-        with(binding) {
-            save?.visibility = INVISIBLE
-            cancel?.visibility = INVISIBLE
+        requestFocus()
+        if (hasWindowFocus()) {
+            showTheKeysNow()
+        } else {
+            with(binding) {
+                save.visibility = INVISIBLE
+                cancel.visibility = INVISIBLE
+            }
         }
     }
 }

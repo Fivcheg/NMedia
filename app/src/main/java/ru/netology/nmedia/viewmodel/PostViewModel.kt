@@ -30,8 +30,10 @@ class PostViewModel : ViewModel() {
     }
 
     fun save() {
-        edited.value?.let {
-            repository.save(it)
+        edited.value.let {
+            if (it != null) {
+                repository.save(it)
+            }
         }
         edited.value = empty
     }
@@ -41,7 +43,7 @@ class PostViewModel : ViewModel() {
     }
 
     fun changeContent(content: String) {
-        edited.value?.let {
+        edited.value.let {
             val text = content.trim()
             if (edited.value?.content == text) {
                 return

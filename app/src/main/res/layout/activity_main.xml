@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/content"
         android:layout_width="200dp"
-        android:layout_height="133dp"
+        android:layout_height="100dp"
         android:background="@android:color/transparent"
         android:hint="@string/post_text"
         android:importantForAutofill="no"
@@ -37,20 +37,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolsTop" />
 
-    <ImageButton
-        android:id="@+id/cancel"
-        android:layout_marginStart="30dp"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="cancel, save" />
+
+    <ImageButton
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:contentDescription="@string/cancel"
-        app:layout_constraintBottom_toTopOf="@id/save"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/save"
         app:layout_constraintStart_toEndOf="@id/content"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_baseline_cancel_24"
-        />
+        app:srcCompat="@drawable/ic_baseline_cancel_24" />
 
     <ImageButton
         android:id="@+id/save"
@@ -59,17 +66,11 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:contentDescription="@string/save"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/content"
         app:layout_constraintTop_toBottomOf="@id/cancel"
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_baseline_check_24" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="cancel, save" />
 
 </FrameLayout>
