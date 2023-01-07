@@ -2,14 +2,13 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.viewModels
-import ru.netology.nmedia.adapter.AndroidUtils
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
+import ru.netology.nmedia.adapter.focusAndShowKeyboard
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         override fun onRemove(post: Post) {
             viewModel.removeById(post.id)
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +40,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val adapter = PostsAdapter(interaction)
         binding.list.adapter = adapter
+        binding.cancel.visibility = INVISIBLE
+        binding.save.visibility = VISIBLE
         viewModel.data.observe(this) { posts ->
-            adapter.submitList(posts)
+            val newPost = adapter.itemCount < posts.size
+            adapter.submitList(posts) {
+                if (newPost) {
+                    binding.list.smoothScrollToPosition(0)
+                }
+            }
         }
 
         viewModel.edited.observe(this) { post ->
@@ -51,14 +56,9 @@ class MainActivity : AppCompatActivity() {
                 return@observe
             }
             with(binding.content) {
-                requestFocus()
+                binding.groupBtn.visibility = VISIBLE
                 setText(post.content)
             }
-        }
-
-        binding.content.setOnClickListener {
-            it.focusAndShowKeys()
-
         }
 
         binding.cancel.setOnClickListener {
@@ -66,16 +66,18 @@ class MainActivity : AppCompatActivity() {
                 viewModel.cancel()
                 setText("")
                 clearFocus()
-                AndroidUtils.hideKeyboard(this)
+                this.focusAndShowKeyboard()
+                binding.groupBtn.visibility = INVISIBLE
+                binding.save.visibility = VISIBLE
             }
         }
 
         binding.save.setOnClickListener {
             with(binding.content) {
-                if (text.isNullOrBlank()) {
+                if (text.isBlank()) {
                     Toast.makeText(
                         this@MainActivity,
-                        "Поле не может быть пустым!",
+                        R.string.error_empty_content,
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -84,30 +86,11 @@ class MainActivity : AppCompatActivity() {
                 viewModel.save()
                 setText("")
                 clearFocus()
-                AndroidUtils.hideKeyboard(this)
+                binding.groupBtn.visibility = INVISIBLE
+                binding.save.visibility = VISIBLE
             }
         }
-    }
 
-    private fun View.focusAndShowKeys() {
-        fun View.showTheKeysNow() {
-            if (isFocused) {
-                with(binding) {
-                    //Как повесить VISIBLE и INVISIBLE на group_btn, а не отдельные кнопки??? Не работает!
-                    save.visibility = VISIBLE
-                    cancel.visibility = VISIBLE
-                }
-            }
-        }
-        requestFocus()
-        if (hasWindowFocus()) {
-            showTheKeysNow()
-        } else {
-            with(binding) {
-                save.visibility = INVISIBLE
-                cancel.visibility = INVISIBLE
-            }
-        }
     }
 }
 

@@ -179,7 +179,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
         if (post.id == 0L) {
             posts = listOf(
                 post.copy(
-                    id = newId++,
+                    id = autoId(),
                     author = "Me",
                     likedByMe = false,
                     published = "now"
