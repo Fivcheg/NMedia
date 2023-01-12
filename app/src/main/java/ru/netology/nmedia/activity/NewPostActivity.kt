@@ -13,6 +13,9 @@ class NewPostActivity : AppCompatActivity() {
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val text = intent?.getStringExtra(Intent.EXTRA_TEXT)
+        binding.content.setText(text)
+
         binding.ok.setOnClickListener {
             val content = binding.content.text.toString()
             if (content.isEmpty()) {
@@ -22,11 +25,16 @@ class NewPostActivity : AppCompatActivity() {
             }
             finish()
         }
+
+        binding.cancel.setOnClickListener {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
     }
 
-    object Contract : ActivityResultContract<Unit, String?>() {
-        override fun createIntent(context: Context, input: Unit): Intent =
-            Intent(context, NewPostActivity::class.java)
+    object Contract : ActivityResultContract<String?, String?>() {
+        override fun createIntent(context: Context, input: String?): Intent =
+            Intent(context, NewPostActivity::class.java).putExtra(Intent.EXTRA_TEXT, input)
 
         override fun parseResult(resultCode: Int, intent: Intent?): String? =
             if (resultCode == RESULT_OK) {

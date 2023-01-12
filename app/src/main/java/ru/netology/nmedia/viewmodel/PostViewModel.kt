@@ -29,26 +29,18 @@ class PostViewModel : ViewModel() {
         edited.value = post
     }
 
-    fun save() {
-        edited.value.let {
-            if (it != null) {
-                repository.save(it)
-            }
-        }
-        edited.value = empty
-    }
-
-    fun cancel() {
-        edited.value = empty
-    }
-
-    fun changeContent(content: String) {
+    fun changeContentAndSave(content: String) {
         edited.value.let {
             val text = content.trim()
             if (edited.value?.content == text) {
                 return
             }
-            edited.value = edited.value?.copy(content = text)
+            edited.value.let {
+                if (it != null) {
+                    repository.save(it.copy(content = text))
+                }
+            }
+            edited.value = empty
         }
     }
 }

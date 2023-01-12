@@ -3,7 +3,6 @@ package ru.netology.nmedia.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
 
-
         override fun onRemove(post: Post) {
             viewModel.removeById(post.id)
         }
@@ -58,34 +56,18 @@ class MainActivity : AppCompatActivity() {
 
         val activityLauncher = registerForActivityResult(NewPostActivity.Contract) { text ->
             text ?: return@registerForActivityResult
-            viewModel.changeContent(text)
-            viewModel.save()
+            viewModel.changeContentAndSave(text)
         }
 
-
-//    viewModel.edited.observe(this) { post ->
-//        if (post.id == 0L) {
-//            return@observe
-//        }
-//        with(binding.content) {
-//            binding.groupBtn.visibility = VISIBLE
-//            setText(post.content)
-//        }
-//    }
-
-//    binding.cancel.setOnClickListener {
-//        with(binding.content) {
-//            viewModel.cancel()
-//            setText("")
-//            clearFocus()
-//            this.focusAndShowKeyboard()
-//            binding.groupBtn.visibility = INVISIBLE
-//            binding.save.visibility = VISIBLE
-//        }
-//    }
+        viewModel.edited.observe(this) { post ->
+            if (post.id == 0L) {
+                return@observe
+            }
+            activityLauncher.launch(post.content)
+        }
 
         binding.add.setOnClickListener {
-            activityLauncher.launch()
+            activityLauncher.launch(null)
         }
 
     }
