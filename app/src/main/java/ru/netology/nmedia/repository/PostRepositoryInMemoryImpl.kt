@@ -17,7 +17,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 10,
             shares = 20,
-            views = 735
+            views = 735,
+            video = "https://www.youtube.com/watch?v=xz-vkzhvKc4"
         ),
         Post(
             id = autoId(),
@@ -28,7 +29,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 55,
             shares = 777,
-            views = 7665
+            views = 7665,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -39,7 +41,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -50,7 +53,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -61,7 +65,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -72,7 +77,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -83,7 +89,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -94,7 +101,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -105,7 +113,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -116,7 +125,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -127,7 +137,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         ),
         Post(
             id = autoId(),
@@ -138,7 +149,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             likes = 1220,
             shares = 34220,
-            views = 73425
+            views = 73425,
+            video = null
         )
     )
     private val data = MutableLiveData(posts)

@@ -25,4 +25,13 @@
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
+    <style name="Widget.AppTheme.SaveButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="android:backgroundTint">@color/save_button_tint</item>
+        <item name="android:strokeColor">#303F9E</item>
+    </style>
+
+    <style name="Widget.AppTheme.CoverButton" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="android:backgroundTint">@color/cover_button_tint</item>
+    </style>
+
 </resources>

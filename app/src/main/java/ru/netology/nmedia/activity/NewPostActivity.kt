@@ -26,10 +26,11 @@ class NewPostActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.cancel.setOnClickListener {
-            setResult(RESULT_CANCELED)
-            finish()
-        }
+
+//        binding.cancel.setOnClickListener {
+//            setResult(RESULT_CANCELED)
+//            finish()
+//        }
     }
 
     object Contract : ActivityResultContract<String?, String?>() {

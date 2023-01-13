@@ -67,6 +67,35 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupCover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="cover, play" />
+
+    <ImageView
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/barrierTop"
+        android:src="@drawable/main_cover"
+        android:contentDescription="@string/cover" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_spacing"
+        android:contentDescription="@string/add_post"
+        app:layout_constraintStart_toStartOf="@id/cover"
+        app:layout_constraintBottom_toBottomOf="@id/cover"
+        app:layout_constraintEnd_toEndOf="@id/cover"
+        app:layout_constraintTop_toTopOf="@id/cover"
+        style="@style/Widget.AppTheme.CoverButton"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
@@ -75,7 +104,7 @@
         android:autoLink="web"
         android:justificationMode="inter_word"
         app:layout_constraintBottom_toBottomOf="@id/barrierBottom"
-        app:layout_constraintTop_toBottomOf="@id/barrierTop"
+        app:layout_constraintTop_toBottomOf="@id/cover"
         tools:targetApi="o"
         tools:text="@sample/posts.json/data/content" />
 
@@ -97,7 +126,6 @@
         android:id="@+id/shared"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkable="true"
         android:contentDescription="@string/shared"
         android:layout_marginStart="@dimen/post_info_counter"
         app:icon="@drawable/ic_baseline_share_24_material"
