@@ -22,7 +22,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="content, save" />
+        app:constraint_referenced_ids="editInfo, cancel" />
+
+    <TextView
+        android:id="@+id/editInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="@string/edit_mode"
+        android:padding="@dimen/common_spacing"
+        app:layout_constraintBottom_toTopOf="@id/content"
+        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/content"
@@ -35,15 +46,14 @@
         android:padding="@dimen/common_spacing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/save"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolsTop" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="cancel,save" />
+        android:visibility="invisible"
+        app:constraint_referenced_ids="cancel, editInfo" />
 
     <ImageButton
         android:id="@+id/save"
@@ -56,6 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/content"
+        app:layout_constraintTop_toTopOf="@id/content"
         app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
 
 
@@ -65,9 +76,11 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@string/cancel"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/save"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/editInfo"
+        app:layout_constraintTop_toTopOf="@id/editInfo"
         app:srcCompat="@drawable/ic_baseline_close_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

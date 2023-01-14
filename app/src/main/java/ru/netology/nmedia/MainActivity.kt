@@ -2,13 +2,14 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.viewModels
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
-import ru.netology.nmedia.adapter.focusAndShowKeyboard
+import ru.netology.nmedia.adapter.hideKeyboard
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -40,8 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val adapter = PostsAdapter(interaction)
         binding.list.adapter = adapter
-        binding.cancel.visibility = INVISIBLE
-        binding.save.visibility = VISIBLE
+        binding.groupBtn.visibility = View.GONE
         viewModel.data.observe(this) { posts ->
             val newPost = adapter.itemCount < posts.size
             adapter.submitList(posts) {
@@ -66,9 +66,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.cancel()
                 setText("")
                 clearFocus()
-                this.focusAndShowKeyboard()
-                binding.groupBtn.visibility = INVISIBLE
-                binding.save.visibility = VISIBLE
+                hideKeyboard(this)
+                binding.groupBtn.visibility = View.GONE
             }
         }
 
@@ -86,8 +85,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.save()
                 setText("")
                 clearFocus()
+                hideKeyboard(this)
                 binding.groupBtn.visibility = INVISIBLE
-                binding.save.visibility = VISIBLE
             }
         }
 

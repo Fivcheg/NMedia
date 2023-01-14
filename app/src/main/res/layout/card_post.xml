@@ -42,16 +42,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="@style/Widget.AppTheme.MenuCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:checkable="true"
         android:contentDescription="@string/menu"
-        android:background="@android:color/transparent"
         app:icon="@drawable/ic_baseline_menu_material_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.AppTheme.MenuCheckBox"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierTop"
@@ -95,18 +94,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shared"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkable="true"
-        android:contentDescription="@string/shared"
         android:layout_marginStart="@dimen/post_info_counter"
+        android:contentDescription="@string/shared"
         app:icon="@drawable/ic_baseline_share_24_material"
-        tools:checked="@sample/posts.json/data/sharedByMe"
         app:layout_constraintStart_toEndOf="@id/liked"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        tools:text="@sample/posts.json/data/shares"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        />
+        tools:checked="@sample/posts.json/data/sharedByMe"
+        tools:text="@sample/posts.json/data/shares" />
 
     <ImageView
         android:id="@+id/views"
