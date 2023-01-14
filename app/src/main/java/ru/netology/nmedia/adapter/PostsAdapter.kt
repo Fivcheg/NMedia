@@ -146,6 +146,7 @@ fun View.focusAndShowKeyboard() {
                         viewTreeObserver.removeOnWindowFocusChangeListener(this)
                     }
                 }
-            })
+            }
+        )
     }
 }

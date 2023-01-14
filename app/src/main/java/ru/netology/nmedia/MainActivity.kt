@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             with(binding.content) {
                 binding.groupBtn.visibility = VISIBLE
                 setText(post.content)
+                this.focusAndShowKeyboard()
             }
         }
 
