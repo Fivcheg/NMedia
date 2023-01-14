@@ -1,11 +1,8 @@
 package ru.netology.nmedia.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -20,6 +17,7 @@ interface OnInteractionListener {
     fun onShare(post: Post) {}
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
+    fun onPlay(post: Post) {}
 }
 
 class PostsAdapter(
@@ -63,6 +61,15 @@ class PostViewHolder(
             shared.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
+
+            play.setOnClickListener {
+                onInteractionListener.onPlay(post)
+            }
+
+            cover.setOnClickListener {
+                onInteractionListener.onPlay(post)
+            }
+
             liked.isChecked = post.likedByMe
             liked.setOnClickListener {
                 onInteractionListener.onLike(post)
@@ -125,29 +132,3 @@ private fun countTransform(x: Int): String {
     return lengthNumber
 }
 
-fun View.focusAndShowKeyboard() {
-    fun View.showTheKeyboardNow() {
-        if (isFocused) {
-            post {
-                val imm =
-                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-            }
-        }
-    }
-
-    requestFocus()
-    if (hasWindowFocus()) {
-        showTheKeyboardNow()
-    } else {
-        viewTreeObserver.addOnWindowFocusChangeListener(
-            object : ViewTreeObserver.OnWindowFocusChangeListener {
-                override fun onWindowFocusChanged(hasFocus: Boolean) {
-                    if (hasFocus) {
-                        this@focusAndShowKeyboard.showTheKeyboardNow()
-                        viewTreeObserver.removeOnWindowFocusChangeListener(this)
-                    }
-                }
-            })
-    }
-}

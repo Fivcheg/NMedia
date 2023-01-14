@@ -12,7 +12,6 @@ class NewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val text = intent?.getStringExtra(Intent.EXTRA_TEXT)
         binding.content.setText(text)
 
@@ -25,12 +24,6 @@ class NewPostActivity : AppCompatActivity() {
             }
             finish()
         }
-
-
-//        binding.cancel.setOnClickListener {
-//            setResult(RESULT_CANCELED)
-//            finish()
-//        }
     }
 
     object Contract : ActivityResultContract<String?, String?>() {

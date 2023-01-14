@@ -17,4 +17,5 @@
     <string name="chooser_share_post">Поделиться записью</string>
     <string name="add_post">Добавить пост</string>
     <string name="cover">Обложка</string>
+    <string name="url">УРЛ</string>
 </resources>

@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -37,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         override fun onRemove(post: Post) {
             viewModel.removeById(post.id)
         }
+
+        override fun onPlay(post: Post) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+            val playIntent = Intent.createChooser(intent, getString(R.string.url))
+            startActivity(playIntent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +76,6 @@ class MainActivity : AppCompatActivity() {
         binding.add.setOnClickListener {
             activityLauncher.launch(null)
         }
-
 
 
     }

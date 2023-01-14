@@ -42,7 +42,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likes = 1220,
             shares = 34220,
             views = 73425,
-            video = null
+            video = "https://www.youtube.com/watch?v=xz-vkzhvKc4"
         ),
         Post(
             id = autoId(),
