@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.adapter.hideKeyboard
+import ru.netology.nmedia.adapter.focusAndShowKeyboard
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -88,10 +89,19 @@ class MainActivity : AppCompatActivity() {
                 hideKeyboard(this)
                 binding.groupBtn.visibility = INVISIBLE
             }
+
+            binding.content.setOnClickListener {
+                with(binding.content) {
+                this.focusAndShowKeyboard()
+                }
+            }
+
         }
 
     }
 }
+
+
 
 
 
