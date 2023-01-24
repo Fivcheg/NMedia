@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -69,7 +70,9 @@ class PostViewHolder(
             cover.setOnClickListener {
                 onInteractionListener.onPlay(post)
             }
-
+            content.setOnClickListener {
+                findNavController(it).navigate(R.id.action_feedFragment_to_postFragment)
+            }
             liked.isChecked = post.likedByMe
             liked.setOnClickListener {
                 onInteractionListener.onLike(post)

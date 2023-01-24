@@ -17,7 +17,30 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class FeedFragment : Fragment() {
-    private val viewModel: PostViewModel by viewModels()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val binding = FragmentFeedBinding.inflate(inflater, container, false)
+        val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
+        val adapter = PostsAdapter(interaction)
+        binding.list.adapter = adapter
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            val newPost = adapter.itemCount < posts.size
+            adapter.submitList(posts) {
+                if (newPost) {
+                    binding.list.smoothScrollToPosition(0)
+                }
+            }
+        }
+        binding.add.setOnClickListener {
+            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+        }
+        return binding.root
+    }
+
+    private val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
     private val interaction = object : OnInteractionListener {
         override fun onEdit(post: Post) {
             viewModel.edit(post)
@@ -47,30 +70,6 @@ class FeedFragment : Fragment() {
             val playIntent = Intent.createChooser(intent, getString(R.string.url))
             startActivity(playIntent)
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentFeedBinding.inflate(inflater, container, false)
-        val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
-        val adapter = PostsAdapter(interaction)
-        binding.list.adapter = adapter
-        viewModel.data.observe(viewLifecycleOwner) { posts ->
-            val newPost = adapter.itemCount < posts.size
-            adapter.submitList(posts) {
-                if (newPost) {
-                    binding.list.smoothScrollToPosition(0)
-                }
-            }
-        }
-
-        binding.add.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment2_to_newPostFragment)
-        }
-        return binding.root
     }
 }
 

@@ -34,7 +34,8 @@ class AppActivity : AppCompatActivity() {
             }
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-            navHostFragment.navController.navigate(R.id.action_feedFragment2_to_newPostFragment,
+            navHostFragment.navController.navigate(
+                R.id.action_feedFragment_to_newPostFragment,
                 Bundle().apply { textArg = text }
             )
         }

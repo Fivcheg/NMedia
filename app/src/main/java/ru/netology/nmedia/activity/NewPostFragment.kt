@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.adapter.PostViewHolder
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import ru.netology.nmedia.util.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -23,7 +24,7 @@ class NewPostFragment : Fragment() {
         arguments?.textArg?.let {
             binding.content.setText(it)
         }
-        //arguments?.textArg?.let(binding.edit::setText)
+
         val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
         val text = activity?.intent?.getStringExtra(Intent.EXTRA_TEXT)
         binding.content.setText(text).toString()
