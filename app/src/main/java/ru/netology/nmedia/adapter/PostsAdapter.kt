@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
+import ru.netology.nmedia.activity.NewPostFragment.Companion.postId
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import kotlin.math.roundToInt
@@ -76,7 +76,7 @@ class PostViewHolder(
             content.setOnClickListener {
                 findNavController(it).navigate(
                     R.id.action_feedFragment_to_postFragment,
-                    Bundle().apply { textArg = post.id.toString() })
+                    Bundle().apply { postId = post.id })
             }
 
             liked.isChecked = post.likedByMe
