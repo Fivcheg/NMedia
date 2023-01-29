@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import kotlin.math.roundToInt
@@ -70,9 +72,13 @@ class PostViewHolder(
             cover.setOnClickListener {
                 onInteractionListener.onPlay(post)
             }
+
             content.setOnClickListener {
-                findNavController(it).navigate(R.id.action_feedFragment_to_postFragment)
+                findNavController(it).navigate(
+                    R.id.action_feedFragment_to_postFragment,
+                    Bundle().apply { textArg = post.id.toString() })
             }
+
             liked.isChecked = post.likedByMe
             liked.setOnClickListener {
                 onInteractionListener.onLike(post)

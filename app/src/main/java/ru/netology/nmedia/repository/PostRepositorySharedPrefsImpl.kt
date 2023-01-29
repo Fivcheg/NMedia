@@ -20,7 +20,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
     init{
         prefs.getString(key, null)?.let {
             posts = gson.fromJson(it, typeToken)
-            newId = (posts.maxOfOrNull { it -> it.id} ?: 0) + 1
+            newId = (posts.maxOfOrNull {it.id} ?: 0) + 1
 
         } ?: run{
             posts = listOf  (
