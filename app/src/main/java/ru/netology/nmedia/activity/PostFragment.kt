@@ -29,6 +29,7 @@ class PostFragment : Fragment(R.layout.fragment_post) {
         val viewHolder = PostViewHolder(binding.post, object : OnInteractionListener {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                findNavController().navigate(R.id.NewPostFragment)
             }
 
             override fun onLike(post: Post) {
