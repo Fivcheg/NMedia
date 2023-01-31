@@ -34,10 +34,10 @@ class FCMService : FirebaseMessagingService() {
         println(Gson().toJson(remoteMessage))
         remoteMessage.data["action"]?.let {
             when (Action.valueOf(it)) {
-                Action.LIKE -> handleLike(
+                Action.NEWPOST -> handleLike(
                     Gson().fromJson(
                         remoteMessage.data["content"],
-                        Like::class.java
+                        NewPost::class.java
                     )
                 )
             }
@@ -48,15 +48,11 @@ class FCMService : FirebaseMessagingService() {
         println(token)
     }
 
-    private fun handleLike(like: Like) {
+    private fun handleLike(newPost: NewPost) {
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(
-                getString(
-                    R.string.notification_user_liked,
-                    like.userName,
-                    like.postAuthor
-                )
+            .setStyle(NotificationCompat.BigTextStyle().bigText(newPost.content))
+            .setContentTitle(getString(R.string.notification_new_post, newPost.postAuthor)
             )
             .build()
 
@@ -64,13 +60,13 @@ class FCMService : FirebaseMessagingService() {
     }
 }
 
-data class Like(
+data class NewPost(
     val userId: Int,
-    val userName: String,
     val postId: Int,
-    val postAuthor: String
+    val postAuthor: String,
+    val content: String
 )
 
 enum class Action {
-    LIKE
+    NEWPOST
 }
