@@ -22,4 +22,5 @@
     <string name="channel_remote_name">Уведомления сервера</string>
     <string name="channel_remote_description">Уведомления с удаленного сервера</string>
     <string name="notification_new_post">Пользователь %1$s опубликовал новый пост</string>
+    <string name="err_action">Данный экшн не найден</string>
 </resources>

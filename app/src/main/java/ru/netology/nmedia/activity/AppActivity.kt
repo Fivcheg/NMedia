@@ -1,8 +1,11 @@
 package ru.netology.nmedia.activity
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.common.ConnectionResult
@@ -18,6 +21,12 @@ class AppActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
 
         intent?.let {
             if (it.action != Intent.ACTION_SEND) {
@@ -36,7 +45,6 @@ class AppActivity : AppCompatActivity() {
                     .show()
                 return@let
             }
-
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
             navHostFragment.navController.navigate(
@@ -64,6 +72,7 @@ class AppActivity : AppCompatActivity() {
         FirebaseMessaging.getInstance().token.addOnSuccessListener {
             print(it)
         }
+
     }
 }
 
